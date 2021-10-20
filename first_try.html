@@ -1,0 +1,36 @@
+<div id="app">
+  <h2>{{ product }} are in stock.</h2>
+  <ul>
+    <li v-for="item in products">
+	  {{ item }}
+	</li>
+  </ul>
+  <ul>
+    <li v-for="item in products_online">
+	  {{ item }}
+	</li>
+  </ul>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+	data: {
+	  product: 'Boots',
+	  products: [
+	    'Audi',
+		'BMW',
+		'Benz'
+	  ],
+	  products_online: []
+	},
+	created() {
+	  fetch('https://api.myjson.com/bins/74l63')
+	    .then(response => response.json())
+		.then(json => {
+		  this.products_online = json.products
+		})
+	}
+  });
+</script>
